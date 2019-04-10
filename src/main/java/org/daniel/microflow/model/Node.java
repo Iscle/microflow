@@ -128,8 +128,8 @@ public class Node extends Element {
 
                 if (type.equals(NodeType.TAD)) {
                     g.draw(new QuadCurve2D.Float(
-                            x + width / 2, y, center.x + 15, center.y - 15,
-                            x + width, y + height / 2
+                            x + width / (float) 2, y, center.x + 15, center.y - 15,
+                            x + width, y + height / (float) 2
                     ));
 
                     g.setFont(FONT_SMALL);
@@ -171,7 +171,7 @@ public class Node extends Element {
             g.setColor(Color.BLACK);
             int nameWidth = g.getFontMetrics().stringWidth(name);
             g.drawString(name, center.x - nameWidth / 2,
-                center.y + (type.equals(NodeType.STATE) ? FONT_LARGE.getSize() / 3 : FONT_MED.getSize() / 3));
+                    center.y + (type.equals(NodeType.STATE) ? FONT_LARGE.getSize() / 3 : FONT_MED.getSize() / 3));
         }
     }
 

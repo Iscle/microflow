@@ -171,15 +171,15 @@ public class Edge extends Element {
         //(x1, y1) = center | (x2, y2) = destination
         double m;
         try {
-           m = (intersection.y - center.y)/(intersection.x - center.x);
+            m = (double) (intersection.y - center.y) / (double) (intersection.x - center.x);
         } catch (ArithmeticException ex) {
-            m  = 0;
+            m = 0;
         }
         double x = intersection.x + 5;
-        double y = m*(x - center.x) + center.y;
+        double y = m * (x - center.x) + center.y;
         Point p = new Point((int) x, (int) y);
         if (n1.circleContains(p)) {
-            p.y = (int) (m*(intersection.x - 5 - center.x) + center.y);
+            p.y = (int) (m * (intersection.x - 5 - center.x) + center.y);
         }
         return p;
     }
@@ -193,23 +193,23 @@ public class Edge extends Element {
         double centerDy = y1 - y2;
         double R = Math.sqrt(centerDx * centerDx + centerDy * centerDy);
 
-        double R2 = R*R;
-        double R4 = R2*R2;
-        double a = (r1*r1 - r2*r2) / (2 * R2);
-        double r2r2 = (r1*r1 - r2*r2);
-        double c = Math.sqrt(2 * (r1*r1 + r2*r2) / R2 - (r2r2 * r2r2) / R4 - 1);
+        double R2 = R * R;
+        double R4 = R2 * R2;
+        double a = (r1 * r1 - r2 * r2) / (2 * R2);
+        double r2r2 = (r1 * r1 - r2 * r2);
+        double c = Math.sqrt(2 * (r1 * r1 + r2 * r2) / R2 - (r2r2 * r2r2) / R4 - 1);
 
-        double fx = (x1+x2) / 2f + a * (x2 - x1);
+        double fx = (x1 + x2) / 2f + a * (x2 - x1);
         double gx = c * (y2 - y1) / 2;
         double ix1 = fx + gx;
 
-        double fy = (y1+y2) / 2f + a * (y2 - y1);
+        double fy = (y1 + y2) / 2f + a * (y2 - y1);
         double gy = c * (x1 - x2) / 2;
         double iy1 = fy + gy;
 
         return new Point((int) ix1, (int) iy1);
     }
-    
+
     private Point bezierLinear(double t, Point p0, Point p1) {
         return new Point(
                 (int) (p0.x + t * (p1.x - p0.x)),
@@ -467,20 +467,20 @@ public class Edge extends Element {
             Point2D.Double nearest = new Point2D.Double(0, 0);
             for (double i = 0; i < H; i += 0.005) {
                 //if (p.y >= centerPointSame.y) {
-                    Point2D.Double pos = pointOfEllipsePositive(i, centerPointSame.x, centerPointSame.y, H/2);
-                    double dPos = Math.hypot(p.x - pos.x, p.y - pos.y);
-                    if (dPos < min) {
-                        min = dPos;
-                        nearest = pos;
-                    }
+                Point2D.Double pos = pointOfEllipsePositive(i, centerPointSame.x, centerPointSame.y, H / 2);
+                double dPos = Math.hypot(p.x - pos.x, p.y - pos.y);
+                if (dPos < min) {
+                    min = dPos;
+                    nearest = pos;
+                }
                 //} else {
-                    Point2D.Double neg = pointOfEllipseNegative(i, centerPointSame.x, centerPointSame.y, H / 2);
-                    double dNeg = Math.hypot(p.x - neg.x, p.y - neg.y);
+                Point2D.Double neg = pointOfEllipseNegative(i, centerPointSame.x, centerPointSame.y, H / 2);
+                double dNeg = Math.hypot(p.x - neg.x, p.y - neg.y);
 
-                    if (dNeg < min) {
-                        min = dNeg;
-                        nearest = neg;
-                    }
+                if (dNeg < min) {
+                    min = dNeg;
+                    nearest = neg;
+                }
                 //}
             }
             return new Point((int) nearest.x, (int) nearest.y);

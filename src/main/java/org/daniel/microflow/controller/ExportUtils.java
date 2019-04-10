@@ -66,7 +66,7 @@ public class ExportUtils {
                         sb.append(INCLUD_H).append(sep).append(sep).append("#include \"").append(name).append(".h\"");
                         sb.append(sep).append(sep).append(VAR_CONST_H).append(sep);
 
-                        for (Edge e: model.getEdges()) {
+                        for (Edge e : model.getEdges()) {
                             if (e.getN1().equals(n)) {
                                 if (e.getN2().getType().equals(NodeType.VARIABLE)) {
                                     sb.append(sep).append(e.getN2().getName()).append(";");
@@ -82,7 +82,7 @@ public class ExportUtils {
 
                         //Functions
                         ArrayList<String> alreadyExported = new ArrayList<>();
-                        for (Edge e: model.getEdges()) {
+                        for (Edge e : model.getEdges()) {
                             if (e.getN2().equals(n)) {
                                 if (e.getN1().getType().equals(NodeType.TAD)) {
                                     if (e.getFunctions() != null) {
@@ -131,7 +131,7 @@ public class ExportUtils {
                         sb.append(INCLUD_H);
                         sb.append(sep);
 
-                        for (Edge e: model.getEdges()) {
+                        for (Edge e : model.getEdges()) {
                             if (e.getN1().equals(n) && e.getN2().getType() == NodeType.TAD) {
                                 sb.append(sep).append("#include \"T").append(e.getN2().getName()).append(".h\"");
                             }
@@ -141,7 +141,7 @@ public class ExportUtils {
 
                         //Functions
                         alreadyExported.clear();
-                        for (Edge e: model.getEdges()) {
+                        for (Edge e : model.getEdges()) {
                             if (e.getN2().equals(n)) {
                                 if (e.getN1().getType().equals(NodeType.TAD)) {
                                     if (e.getFunctions() != null) {
@@ -218,7 +218,7 @@ public class ExportUtils {
                         boolean hasCondition = false;
                         sb.append("\t\tcase ").append(n.getName()).append(":").append(sep);
                         isElseIf = false;
-                        for (Edge e: model.getEdges()) {
+                        for (Edge e : model.getEdges()) {
 
                             if (e.getN1().equals(n)) {
                                 hasCondition = true;

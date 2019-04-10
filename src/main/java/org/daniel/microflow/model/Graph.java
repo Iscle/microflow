@@ -119,8 +119,7 @@ public class Graph {
         if (n.getType().equals(NodeType.STATE)) {
             int changedTo = Integer.valueOf(n.getName());
             int count = 0;
-            for (int i = 0; i < nodes.size(); i++) {
-                Node k = nodes.get(i);
+            for (Node k : nodes) {
                 if (k.getType().equals(NodeType.STATE) && !k.nameHold()) {
                     if (count == changedTo) {
                         count++;
@@ -136,8 +135,7 @@ public class Graph {
         if (e.getType().equals(EdgeType.INTERFACE)) {
             int changedTo = Integer.valueOf(e.getName());
             int count = 0;
-            for (int i = 0; i < edges.size(); i++) {
-                Edge k = edges.get(i);
+            for (Edge k : edges) {
                 if (k.getType().equals(EdgeType.INTERFACE) && !k.nameHold()) {
                     if (count == changedTo) {
                         count++;
@@ -260,7 +258,9 @@ public class Graph {
                     if (ours <= theirs) {
                         Edge.setInterfaceCount(theirs + 1);
                     }
-                } catch (NumberFormatException ok) { }
+                } catch (NumberFormatException ok) {
+                    // Ignored
+                }
             }
             for (Node n : g.nodes) {
                 try {
@@ -269,7 +269,9 @@ public class Graph {
                     if (ours <= theirs) {
                         Node.setStateCount(theirs + 1);
                     }
-                } catch (NumberFormatException ok) { }
+                } catch (NumberFormatException ok) {
+                    // Ignored
+                }
                 if (e.getN1().equals(n)) e.setN1(n);
                 if (e.getN2().equals(n)) e.setN2(n);
                 n.setSelected(false);

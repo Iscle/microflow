@@ -3,8 +3,8 @@ package org.daniel.microflow.controller;
 import org.daniel.microflow.model.Action;
 import org.daniel.microflow.model.*;
 import org.daniel.microflow.view.ContextMenu;
-import org.daniel.microflow.view.DrawPanel;
 import org.daniel.microflow.view.DiagramView;
+import org.daniel.microflow.view.DrawPanel;
 import org.daniel.microflow.view.OuterView;
 
 import javax.imageio.ImageIO;
@@ -29,7 +29,7 @@ public class Controller extends MouseAdapter implements ActionListener {
     private CursorDetail state;
     private Node addingEdgeFrom;
     private ContextMenu contextMenu;
-    private final static String OPTIONS[] = {"Read/Write", "Write", "Read"};
+    private final static String[] OPTIONS = {"Read/Write", "Write", "Read"};
     private final JFileChooser chooser;
     private boolean draggingPivot;
     private boolean draggingName;
@@ -317,7 +317,7 @@ public class Controller extends MouseAdapter implements ActionListener {
             } else {
                 //se ha clickado fuera de un elemento, posiblemente
                 if (clicked instanceof Node || clicked instanceof Action || clicked instanceof Edge && !((Edge) clicked).pivotContains(e.getPoint())
-                        ) {
+                ) {
                     //si se clicó fuera del nodo, deseleccionarlo
                     //si se clicó fuera PERO era un edge y NO se clicó en el pivot del edge, deseleccionarlo
                     //si se clicó fuera PERO era un edge y NO se clicó en el nombre del edge, deseleccionarlo
@@ -402,7 +402,7 @@ public class Controller extends MouseAdapter implements ActionListener {
                     break;
                 case OPERATION:
                     int res = JOptionPane.showOptionDialog(view, "What would you like this operation to be?",
-                            "Operation settings", 0, JOptionPane.QUESTION_MESSAGE, null, OPTIONS,
+                            "Operation settings", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, OPTIONS,
                             null);
                     if (res == 2) { //read
                         model.addPhase();
