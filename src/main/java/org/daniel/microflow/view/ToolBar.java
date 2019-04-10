@@ -24,6 +24,7 @@ public class ToolBar extends JPanel {
     private JButton jbCursor;
     private JButton jbDelete;
     private JButton jbUndo;
+    private JButton jbRedo;
 
     /* TADs diagram */
     private JButton jbTAD;
@@ -55,6 +56,7 @@ public class ToolBar extends JPanel {
     private static final String CURSOR_ICON = "/image/toolbar/cursor.png";
     public static final String DELETE_ICON = "/image/toolbar/delete.png";
     public static final String UNDO_ICON = "/image/toolbar/undo.png";
+    public static final String REDO_ICON = "/image/toolbar/redo.png";
 
     private static final String TAD_ICON = "/image/toolbar/TAD.png";
     private static final String VAR_ICON = "/image/toolbar/var.png";
@@ -125,10 +127,12 @@ public class ToolBar extends JPanel {
         jbCursor = makeCustomButton("Select cursor", CURSOR_ICON);
         jbDelete = makeCustomButton("Delete element", DELETE_ICON);
         jbUndo = makeCustomButton("Undo", UNDO_ICON);
+        jbRedo = makeCustomButton("Redo", REDO_ICON);
 
         jpButtons.add(jbCursor);
         jpButtons.add(jbDelete);
         jpButtons.add(jbUndo);
+        jpButtons.add(jbRedo);
 
         jtbIcons.add(jpButtons);
     }
@@ -233,7 +237,8 @@ public class ToolBar extends JPanel {
         jbDelete.setActionCommand(CursorDetail.DELETING.name());
         jbUndo.addActionListener(c);
         jbUndo.setActionCommand(CursorDetail.UNDO.name());
-
+        jbRedo.addActionListener(c);
+        jbRedo.setActionCommand(CursorDetail.REDO.name());
 
         jbTAD.addActionListener(c);
         jbTAD.setActionCommand(CursorDetail.ADD_TAD.name());
