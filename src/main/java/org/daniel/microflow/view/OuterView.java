@@ -29,6 +29,9 @@ public class OuterView extends JFrame {
         setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        setIconImage(new ImageIcon(ToolBar.class.getResource("/image/logo.png")).getImage()
+                .getScaledInstance(128, 128, Image.SCALE_SMOOTH));
+
         tabbedPane = new JTabbedPane();
         tabbedPane.setBorder(new EmptyBorder(0, 0, 0, 0));
         //tabbedPane.setBackground(Color.WHITE);
