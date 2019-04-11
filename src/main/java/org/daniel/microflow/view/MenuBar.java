@@ -78,17 +78,17 @@ public class MenuBar extends JMenuBar {
         /* File related options */
         jmiNewFile = new JMenuItem("New file");
         jmiNewFile.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_N, (Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())));
+                KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         jmiOpenFile = new JMenuItem("Open file");
         jmiOpenFile.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_O, (Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())));
+                KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         jmiSave = new JMenuItem("Save");
         jmiSave.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_S, (Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())));
+                KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         jmiSavePNG = new JMenuItem("Save as PNG");
         jmiPrint = new JMenuItem("Print");
         jmiPrint.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_P, (Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())));
+                KeyStroke.getKeyStroke(KeyEvent.VK_P, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 
         JMenuItem jmiExit = new JMenuItem("Exit");
         jmiExit.addActionListener(e -> System.exit(0));
@@ -120,11 +120,11 @@ public class MenuBar extends JMenuBar {
         jmiDelete = new JMenuItem("Delete");
         jmiUndo = new JMenuItem("Undo");
         jmiUndo.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_Z, (Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())));
+                KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 
         jmiRedo = new JMenuItem("Redo");
         jmiRedo.setAccelerator(
-                KeyStroke.getKeyStroke(KeyEvent.VK_Y, (Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())));
+                KeyStroke.getKeyStroke(KeyEvent.VK_Y, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 
         jmTools.add(jmiCursor);
         jmTools.add(jmiDelete);
