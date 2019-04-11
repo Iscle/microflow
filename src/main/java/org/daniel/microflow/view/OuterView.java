@@ -17,8 +17,8 @@ import java.io.File;
 public class OuterView extends JFrame {
 
     private static final String TITLE = "Diagram ";
-    private static final int MIN_WIDTH = 1024;
-    private static final int MIN_HEIGHT = 768;
+    private static final int DEFAULT_WIDTH = 1024;
+    private static final int DEFAULT_HEIGHT = 768;
     private static final int CLOSE_BTN_SIZE = 18;
 
     private final JTabbedPane tabbedPane;
@@ -26,7 +26,7 @@ public class OuterView extends JFrame {
 
     public OuterView() {
         setTitle(TITLE);
-        setMinimumSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
+        setSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setIconImage(new ImageIcon(ToolBar.class.getResource("/image/logo.png")).getImage()
@@ -120,7 +120,6 @@ public class OuterView extends JFrame {
             for (int i = 0; i < tabbedPane.getTabCount(); i++) {
                 JButton other = ((JButton) ((JPanel) tabbedPane.getTabComponentAt(i)).getComponent(1));
                 if (other.getActionCommand().equalsIgnoreCase(toClose)) {
-
                     int result = JOptionPane.showConfirmDialog(OuterView.this,
                             "Are you sure you want to close this tab?",
                             "Close tab", JOptionPane.YES_NO_OPTION);
