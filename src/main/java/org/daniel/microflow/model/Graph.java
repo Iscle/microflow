@@ -1,7 +1,6 @@
 package org.daniel.microflow.model;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.awt.*;
 import java.io.*;
@@ -13,11 +12,13 @@ import java.util.List;
 
 public class Graph {
 
-    private transient static final Gson gson = new GsonBuilder().create();
+    private transient static final Gson gson = new Gson();
 
     private LinkedList<Node> nodes;
     private LinkedList<Edge> edges;
     private LinkedList<Action> actions;
+    private transient int interfaceCount;
+    private transient int stateCount;
     private transient LinkedList<String> phases;
     private transient LinkedList<String> revertedPhases;
 
@@ -86,7 +87,7 @@ public class Graph {
                     k.setName(String.valueOf(count++));
                 }
             }
-            Node.decrementStateCount();
+            decrementStateCount();
         }
     }
 
@@ -111,7 +112,7 @@ public class Graph {
                     k.setName(String.valueOf(count++));
                 }
             }
-            Edge.decrementInterfaceCount();
+            decrementInterfaceCount();
         }
     }
 
@@ -148,8 +149,8 @@ public class Graph {
     }
 
     public void deleteAll() {
-        Edge.setInterfaceCount(0);
-        Node.setStateCount(0);
+        setInterfaceCount(0);
+        setStateCount(0);
         nodes.clear();
         edges.clear();
         actions.clear();
@@ -253,10 +254,10 @@ public class Graph {
             e.setSelected(false);
             if (e.getType().equals(EdgeType.INTERFACE)) {
                 try {
-                    int ours = Edge.getInterfaceCount();
+                    int ours = getInterfaceCount();
                     int theirs = Integer.parseInt(e.getName());
                     if (ours <= theirs) {
-                        Edge.setInterfaceCount(theirs + 1);
+                        setInterfaceCount(theirs + 1);
                     }
                 } catch (NumberFormatException ok) {
                     // Ignored
@@ -264,10 +265,10 @@ public class Graph {
             }
             for (Node n : g.nodes) {
                 try {
-                    int ours = Node.getStateCount();
+                    int ours = getStateCount();
                     int theirs = Integer.parseInt(n.getName());
                     if (ours <= theirs) {
-                        Node.setStateCount(theirs + 1);
+                        setStateCount(theirs + 1);
                     }
                 } catch (NumberFormatException ok) {
                     // Ignored
@@ -313,5 +314,37 @@ public class Graph {
             loadFromJson(revertedPhases.getLast());
             revertedPhases.removeLast();
         }
+    }
+
+    public int decrementStateCount() {
+        return stateCount--;
+    }
+
+    public int incrementStateCount() {
+        return stateCount++;
+    }
+
+    public void setStateCount(int count) {
+        stateCount = count;
+    }
+
+    public int getStateCount() {
+        return stateCount;
+    }
+
+    public int decrementInterfaceCount() {
+        return interfaceCount--;
+    }
+
+    public int incrementInterfaceCount() {
+        return interfaceCount++;
+    }
+
+    public void setInterfaceCount(int count) {
+        interfaceCount = count;
+    }
+
+    public int getInterfaceCount() {
+        return interfaceCount;
     }
 }

@@ -5,10 +5,8 @@ import java.awt.geom.QuadCurve2D;
 
 public class Node extends Element {
 
-    protected Point center;
-    protected NodeType type;
-
-    private static int stateCount = 0;
+    private Point center;
+    NodeType type;
 
     private static final String TAD = "TAD";
 
@@ -18,10 +16,6 @@ public class Node extends Element {
         this.center = center;
         setBounds();
         setName(name);
-    }
-
-    public Node(NodeType type, Point center) {
-        this(type, String.valueOf(stateCount++), center);
     }
 
     @Override
@@ -44,18 +38,6 @@ public class Node extends Element {
         this.center = center;
         setBounds();
         setName(name);
-    }
-
-    public static void decrementStateCount() {
-        stateCount--;
-    }
-
-    public static void setStateCount(int count) {
-        stateCount = count;
-    }
-
-    public static int getStateCount() {
-        return stateCount;
     }
 
     public boolean circleContains(Point p) {

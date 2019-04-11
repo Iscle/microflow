@@ -494,7 +494,7 @@ public class Controller extends MouseAdapter implements ActionListener {
         if (obj instanceof NodeType) {
             NodeType nt = (NodeType) obj;
             if (nt.equals(NodeType.STATE)) {
-                model.addNode(new Node(nt, e.getPoint()));
+                model.addNode(new Node(nt, String.valueOf(model.incrementStateCount()), e.getPoint()));
             } else {
                 model.addNode(new Node(nt, state.getNameToAdd(), e.getPoint()));
             }
@@ -555,7 +555,7 @@ public class Controller extends MouseAdapter implements ActionListener {
             if (element instanceof Node) {
                 EdgeType edgeType = (EdgeType) state.getElementToAdd();
                 if (edgeType.equals(EdgeType.INTERFACE)) {
-                    model.addEdge(new Edge(edgeType, addingEdgeFrom, (Node) element, model));
+                    model.addEdge(new Edge(edgeType, String.valueOf(model.incrementInterfaceCount()), addingEdgeFrom, (Node) element, model));
                 } else {
                     model.addEdge(new Edge(edgeType, state.getNameToAdd(), addingEdgeFrom, (Node) element, model));
                 }
