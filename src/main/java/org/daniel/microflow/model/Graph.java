@@ -178,16 +178,14 @@ public class Graph {
     }
 
     public boolean loadFromJson(String json) {
-        try {
-            Graph g = fromJson(json);
-            edges = g.edges;
-            nodes = g.nodes;
-            actions = g.actions;
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        // TODO: Change the return type or make it useful again
+        Graph g = fromJson(json);
+        edges = g.edges;
+        nodes = g.nodes;
+        actions = g.actions;
+        interfaceCount = g.interfaceCount;
+        stateCount = g.stateCount;
+        return true;
     }
 
     public boolean loadFromFile(String path) {
@@ -246,15 +244,34 @@ public class Graph {
     }
 
     private Graph fromJson(String json) {
-        // TODO: optimize this lol
         Graph g = gson.fromJson(json, Graph.class);
+
         int highestInterface = 0;
         int highestState = 0;
+
         for (Edge e : g.edges) {
-            int interfaceNumber = Integer.valueOf(e.name);
-            if (interfaceNumber > highestInterface) {
-                highestInterface = interfaceNumber;
+            if (e.getType().equals(EdgeType.INTERFACE)) {
+                int interfaceNumber = Integer.valueOf(e.name);
+                if (interfaceNumber > highestInterface) {
+                    highestInterface = interfaceNumber;
+                }
             }
+        }
+
+        for (Node n : g.nodes) {
+            if (n.getType().equals(NodeType.STATE)) {
+                int stateNumber = Integer.valueOf(n.name);
+                if (stateNumber > highestState) {
+                    highestState = stateNumber;
+                }
+            }
+        }
+
+        g.interfaceCount = highestInterface + 1;
+        g.stateCount = highestState + 1;
+
+        // TODO: descobrir que fa aixo
+        for (Edge e : g.edges) {
             e.setSelected(false);
             if (e.getType().equals(EdgeType.INTERFACE)) {
                 try {
@@ -268,10 +285,6 @@ public class Graph {
                 }
             }
             for (Node n : g.nodes) {
-                int stateNumber = Integer.valueOf(n.name);
-                if (stateNumber > highestState) {
-                    highestState = stateNumber;
-                }
                 try {
                     int ours = getStateCount();
                     int theirs = Integer.parseInt(n.getName());
@@ -297,8 +310,8 @@ public class Graph {
                 }
             }
         }
-        g.interfaceCount = highestInterface;
-        g.stateCount = highestState;
+        // TODO: descobrir que fa aixo
+
         return g;
     }
 
