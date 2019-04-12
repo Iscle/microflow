@@ -218,7 +218,6 @@ public class Graph {
         }
     }
 
-
     public boolean canBeExported(int isTAD) {
         boolean tadFound = false;
         boolean stateFound = false;
@@ -240,8 +239,6 @@ public class Graph {
         } else {
             return stateFound;
         }
-
-
     }
 
     private String toJson() {
@@ -249,8 +246,15 @@ public class Graph {
     }
 
     private Graph fromJson(String json) {
+        // TODO: optimize this lol
         Graph g = gson.fromJson(json, Graph.class);
+        int highestInterface = 0;
+        int highestState = 0;
         for (Edge e : g.edges) {
+            int interfaceNumber = Integer.valueOf(e.name);
+            if (interfaceNumber > highestInterface) {
+                highestInterface = interfaceNumber;
+            }
             e.setSelected(false);
             if (e.getType().equals(EdgeType.INTERFACE)) {
                 try {
@@ -264,6 +268,10 @@ public class Graph {
                 }
             }
             for (Node n : g.nodes) {
+                int stateNumber = Integer.valueOf(n.name);
+                if (stateNumber > highestState) {
+                    highestState = stateNumber;
+                }
                 try {
                     int ours = getStateCount();
                     int theirs = Integer.parseInt(n.getName());
@@ -289,6 +297,8 @@ public class Graph {
                 }
             }
         }
+        g.interfaceCount = highestInterface;
+        g.stateCount = highestState;
         return g;
     }
 
@@ -346,5 +356,53 @@ public class Graph {
 
     public int getInterfaceCount() {
         return interfaceCount;
+    }
+
+    public int getLowestX() {
+        int lowestX = nodes.get(0).getCenter().x;
+
+        for (Node n : nodes) {
+            if (n.getCenter().x < lowestX) {
+                lowestX = n.getCenter().x;
+            }
+        }
+
+        return lowestX;
+    }
+
+    public int getHighestX() {
+        int highestX = nodes.get(0).getCenter().x;
+
+        for (Node n : nodes) {
+            if (n.getCenter().x > highestX) {
+                highestX = n.getCenter().x;
+            }
+        }
+
+        return highestX;
+    }
+
+    public int getLowestY() {
+        int lowestY = nodes.get(0).getCenter().y;
+
+        for (Node n : nodes) {
+            if (n.getCenter().y < lowestY) {
+                lowestY = n.getCenter().y;
+            }
+        }
+
+        return lowestY;
+    }
+
+    public int getHighestY() {
+        int highestY = nodes.get(0).getCenter().y;
+
+        for (Node n : nodes) {
+            if (n.getCenter().y > highestY) {
+                highestY = n.getCenter().y;
+            }
+        }
+
+        return highestY;
     }
 }
