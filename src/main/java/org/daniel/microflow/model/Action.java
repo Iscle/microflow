@@ -82,7 +82,7 @@ public class Action extends Element {
         return this.start.x + (endLstart ? -length() : length());
     }
 
-    public void setEnd(Point end) {
+    private void setEnd(Point end) {
         if (this.end == null) this.end = new Point(0, 0);
         this.end.x = end.x;
         this.end.y = start.y;

@@ -40,9 +40,9 @@ public enum CursorDetail {
     UNDO(Cursor.getDefaultCursor(), null, null),
     REDO(Cursor.getDefaultCursor(), null, null);
 
-    private Cursor cursor;
-    private Object elementToAdd;
-    private String nameToAdd;
+    private final Cursor cursor;
+    private final Object elementToAdd;
+    private final String nameToAdd;
 
     CursorDetail(Cursor cursor, Object elementToAdd, String nameToAdd) {
         this.cursor = cursor;

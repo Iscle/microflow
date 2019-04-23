@@ -18,13 +18,13 @@ public class DrawPanel extends JPanel {
     private Point pivot;
     private Point end;
     private int type;
-    private Rectangle bounds;
+    private final Rectangle bounds;
     private final Stroke lineStroke = new BasicStroke(1.5f);
     private final Graph graph;
 
     public DrawPanel(Graph graph) {
         super();
-        setBackground(Color.decode("#FEFEFE"));
+        setBackground(Color.WHITE);
         type = NONE;
         bounds = new Rectangle(0, 0, getWidth() - 30, getHeight() - 30);
 

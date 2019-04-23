@@ -12,7 +12,7 @@ import java.awt.event.MouseEvent;
 
 public class ToolBar extends JPanel {
 
-    private JToolBar jtbIcons;
+    private final JToolBar jtbIcons;
 
     /* Files */
     private JButton jbNewFile;
@@ -55,8 +55,8 @@ public class ToolBar extends JPanel {
     private static final String PRINT_FILE_ICON = "/image/toolbar/print_file.png";
     private static final String CURSOR_ICON = "/image/toolbar/cursor.png";
     public static final String DELETE_ICON = "/image/toolbar/delete.png";
-    public static final String UNDO_ICON = "/image/toolbar/undo.png";
-    public static final String REDO_ICON = "/image/toolbar/redo.png";
+    private static final String UNDO_ICON = "/image/toolbar/undo.png";
+    private static final String REDO_ICON = "/image/toolbar/redo.png";
 
     private static final String TAD_ICON = "/image/toolbar/TAD.png";
     private static final String VAR_ICON = "/image/toolbar/var.png";
@@ -181,7 +181,7 @@ public class ToolBar extends JPanel {
         jtbIcons.add(panel);
     }
 
-    public static JButton makeCustomButton(String tipText, String iconPath) {
+    private static JButton makeCustomButton(String tipText, String iconPath) {
         return makeCustomButton(tipText, iconPath, BUTTON_SIZE);
     }
 

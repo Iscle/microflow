@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 
-public class ExportUtils {
+class ExportUtils {
 
     private static final String COMMENT_HEADER = "//---------------------------------------------------------";
     private static final String TAD_H = "// @File: ";
@@ -34,7 +34,7 @@ public class ExportUtils {
     private static final String sep = System.lineSeparator();
 
     public static void exportFile(Graph model, JFileChooser chooser, DiagramView view) {
-        if (model.canBeExported(1)) {
+        if (model.canBeExported(true)) {
             chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             chooser.setFileFilter(null);
             if (chooser.showSaveDialog(view) == JFileChooser.APPROVE_OPTION) {
@@ -86,7 +86,7 @@ public class ExportUtils {
                             if (e.getN2().equals(n)) {
                                 if (e.getN1().getType().equals(NodeType.TAD)) {
                                     if (e.getFunctions() != null) {
-                                        //Check if already exported
+                                        // Check if already exported
                                         if (alreadyExported.contains(e.getName())) continue;
 
                                         //Get all lines
@@ -99,7 +99,7 @@ public class ExportUtils {
                                             }
                                         }
 
-                                        //Write only function lines
+                                        // Write only function lines
                                         for (String line : a) {
                                             if (line.trim().equals("")) continue;
                                             if (line.startsWith("//")) continue;
@@ -139,7 +139,7 @@ public class ExportUtils {
                         sb.append(sep).append(sep).append(FUNC_H).append(sep).append(sep).append("void init");
                         sb.append(name).append("(void);").append(sep);
 
-                        //Functions
+                        // Functions
                         alreadyExported.clear();
                         for (Edge e : model.getEdges()) {
                             if (e.getN2().equals(n)) {
@@ -195,7 +195,7 @@ public class ExportUtils {
     }
 
     public static void exportMotor(Graph model, JFileChooser chooser, DiagramView view) {
-        if (model.canBeExported(0)) {
+        if (model.canBeExported(false)) {
             chooser.setSelectedFile(new File(chooser.getSelectedFile().getName().replace(".mcf", "")));
             chooser.setFileFilter(new FileNameExtensionFilter("C source (.c)", "c"));
             if (chooser.showSaveDialog(view) == JFileChooser.APPROVE_OPTION) {
@@ -285,7 +285,7 @@ public class ExportUtils {
     }
 
     public static void exportDictionary(Graph model, JFileChooser chooser, DiagramView view) {
-        if (model.canBeExported(1)) {
+        if (model.canBeExported(true)) {
             StringBuilder sb = new StringBuilder();
             HashSet<String> added = new HashSet<>();
             for (Edge e : model.getEdges()) {

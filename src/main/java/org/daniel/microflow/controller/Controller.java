@@ -28,13 +28,14 @@ public class Controller extends MouseAdapter implements ActionListener {
     private Element clicked;
     private CursorDetail state;
     private Node addingEdgeFrom;
-    private ContextMenu contextMenu;
+    private final ContextMenu contextMenu;
     private final static String[] OPTIONS = {"Read/Write", "Write", "Read"};
     private final JFileChooser chooser;
     private boolean draggingPivot;
     private boolean draggingName;
     private boolean draggingActionPivot;
-    private Point mousePoint, delta;
+    private Point mousePoint;
+    private final Point delta;
     private long lastClick;
 
     private String fileName;
@@ -261,7 +262,7 @@ public class Controller extends MouseAdapter implements ActionListener {
         Edge e = (Edge) clicked;
         String content = view.editFunctionDialog(e.getFunctions());
         if (content != null) {
-            //e.holdName(true);
+            //e.setHoldName(true);
             e.setFunctions(content);
         }
 
@@ -374,7 +375,7 @@ public class Controller extends MouseAdapter implements ActionListener {
                 if (name != null) {
                     model.addPhase();
                     clicked.setName(name);
-                    clicked.holdName(true);
+                    clicked.setHoldName(true);
                     model.changedStateName(n);
                 }
             }
@@ -388,7 +389,7 @@ public class Controller extends MouseAdapter implements ActionListener {
                     if (name != null) {
                         model.addPhase();
                         clicked.setName(name);
-                        clicked.holdName(true);
+                        clicked.setHoldName(true);
                         model.changedInterfaceName(e);
                     }
                     break;
@@ -397,7 +398,7 @@ public class Controller extends MouseAdapter implements ActionListener {
                     if (name != null) {
                         model.addPhase();
                         clicked.setName(name);
-                        clicked.holdName(true);
+                        clicked.setHoldName(true);
                     }
                     break;
                 case OPERATION:

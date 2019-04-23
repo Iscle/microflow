@@ -8,7 +8,7 @@ import javax.swing.event.ChangeListener;
 
 public class OuterController implements ChangeListener {
 
-    private OuterView view;
+    private final OuterView view;
 
     public OuterController(OuterView view) {
         this.view = view;

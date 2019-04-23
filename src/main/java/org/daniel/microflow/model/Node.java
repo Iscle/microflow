@@ -6,7 +6,7 @@ import java.awt.geom.QuadCurve2D;
 public class Node extends Element {
 
     private Point center;
-    NodeType type;
+    final NodeType type;
 
     private static final String TAD = "TAD";
 

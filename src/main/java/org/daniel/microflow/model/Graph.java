@@ -19,8 +19,8 @@ public class Graph {
     private LinkedList<Action> actions;
     private transient int interfaceCount;
     private transient int stateCount;
-    private transient LinkedList<String> phases;
-    private transient LinkedList<String> revertedPhases;
+    private final transient LinkedList<String> phases;
+    private final transient LinkedList<String> revertedPhases;
 
     public Graph() {
         nodes = new LinkedList<>();
@@ -79,11 +79,11 @@ public class Graph {
         decrementStatesCount(n);
     }
 
-    public void decrementStatesCount(Node n) {
+    private void decrementStatesCount(Node n) {
         if (n.getType().equals(NodeType.STATE)) {
             int count = 0;
             for (Node k : nodes) {
-                if (k.getType().equals(NodeType.STATE) && !k.nameHold()) {
+                if (k.getType().equals(NodeType.STATE) && !k.getHoldName()) {
                     k.setName(String.valueOf(count++));
                 }
             }
@@ -104,11 +104,11 @@ public class Graph {
         }
     }
 
-    public void decrementEdgesCount(Edge e) {
+    private void decrementEdgesCount(Edge e) {
         if (e.getType().equals(EdgeType.INTERFACE)) {
             int count = 0;
             for (Edge k : edges) {
-                if (k.getType().equals(EdgeType.INTERFACE) && !k.nameHold()) {
+                if (k.getType().equals(EdgeType.INTERFACE) && !k.getHoldName()) {
                     k.setName(String.valueOf(count++));
                 }
             }
@@ -121,7 +121,7 @@ public class Graph {
             int changedTo = Integer.valueOf(n.getName());
             int count = 0;
             for (Node k : nodes) {
-                if (k.getType().equals(NodeType.STATE) && !k.nameHold()) {
+                if (k.getType().equals(NodeType.STATE) && !k.getHoldName()) {
                     if (count == changedTo) {
                         count++;
                     } else {
@@ -137,7 +137,7 @@ public class Graph {
             int changedTo = Integer.valueOf(e.getName());
             int count = 0;
             for (Edge k : edges) {
-                if (k.getType().equals(EdgeType.INTERFACE) && !k.nameHold()) {
+                if (k.getType().equals(EdgeType.INTERFACE) && !k.getHoldName()) {
                     if (count == changedTo) {
                         count++;
                     } else {
@@ -177,7 +177,7 @@ public class Graph {
         );
     }
 
-    public boolean loadFromJson(String json) {
+    private void loadFromJson(String json) {
         // TODO: Change the return type or make it useful again
         Graph g = fromJson(json);
         edges = g.edges;
@@ -185,7 +185,6 @@ public class Graph {
         actions = g.actions;
         interfaceCount = g.interfaceCount;
         stateCount = g.stateCount;
-        return true;
     }
 
     public boolean loadFromFile(String path) {
@@ -198,7 +197,8 @@ public class Graph {
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
             }
-            return loadFromJson(sb.toString());
+            loadFromJson(sb.toString());
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -216,7 +216,7 @@ public class Graph {
         }
     }
 
-    public boolean canBeExported(int isTAD) {
+    public boolean canBeExported(boolean isTAD) {
         boolean tadFound = false;
         boolean stateFound = false;
 
@@ -232,7 +232,7 @@ public class Graph {
             }
         }
 
-        if (isTAD == 1) {
+        if (isTAD) {
             return tadFound;
         } else {
             return stateFound;
@@ -270,9 +270,7 @@ public class Graph {
         g.interfaceCount = highestInterface + 1;
         g.stateCount = highestState + 1;
 
-        // TODO: descobrir que fa aixo
         for (Edge e : g.edges) {
-            e.setSelected(false);
             if (e.getType().equals(EdgeType.INTERFACE)) {
                 try {
                     int ours = getInterfaceCount();
@@ -280,7 +278,7 @@ public class Graph {
                     if (ours <= theirs) {
                         setInterfaceCount(theirs + 1);
                     }
-                } catch (NumberFormatException ok) {
+                } catch (NumberFormatException e1) {
                     // Ignored
                 }
             }
@@ -291,12 +289,11 @@ public class Graph {
                     if (ours <= theirs) {
                         setStateCount(theirs + 1);
                     }
-                } catch (NumberFormatException ok) {
+                } catch (NumberFormatException e1) {
                     // Ignored
                 }
                 if (e.getN1().equals(n)) e.setN1(n);
                 if (e.getN2().equals(n)) e.setN2(n);
-                n.setSelected(false);
                 e.setGraph(g);
             }
             if (e.getAction() != null) {
@@ -310,7 +307,6 @@ public class Graph {
                 }
             }
         }
-        // TODO: descobrir que fa aixo
 
         return g;
     }
@@ -326,20 +322,18 @@ public class Graph {
     public void undo() {
         if (phases.size() > 0) {
             revertedPhases.add(toJson());
-            loadFromJson(phases.getLast());
-            phases.removeLast();
+            loadFromJson(phases.removeLast());
         }
     }
 
     public void redo() {
         if (revertedPhases.size() > 0) {
             phases.add(toJson());
-            loadFromJson(revertedPhases.getLast());
-            revertedPhases.removeLast();
+            loadFromJson(revertedPhases.removeLast());
         }
     }
 
-    public int decrementStateCount() {
+    private int decrementStateCount() {
         return stateCount--;
     }
 
@@ -347,15 +341,15 @@ public class Graph {
         return stateCount++;
     }
 
-    public void setStateCount(int count) {
+    private void setStateCount(int count) {
         stateCount = count;
     }
 
-    public int getStateCount() {
+    private int getStateCount() {
         return stateCount;
     }
 
-    public int decrementInterfaceCount() {
+    private int decrementInterfaceCount() {
         return interfaceCount--;
     }
 
@@ -363,11 +357,11 @@ public class Graph {
         return interfaceCount++;
     }
 
-    public void setInterfaceCount(int count) {
+    private void setInterfaceCount(int count) {
         interfaceCount = count;
     }
 
-    public int getInterfaceCount() {
+    private int getInterfaceCount() {
         return interfaceCount;
     }
 

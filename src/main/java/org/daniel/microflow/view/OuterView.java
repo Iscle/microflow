@@ -112,7 +112,7 @@ public class OuterView extends JFrame {
         label.setText(title);
     }
 
-    private ActionListener closeTabListener = new ActionListener() {
+    private final ActionListener closeTabListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             JButton btn = (JButton) e.getSource();

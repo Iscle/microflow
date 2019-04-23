@@ -10,11 +10,11 @@ public enum NodeType {
     STATE(45, 45, new BasicStroke(3), Color.BLACK, Color.decode("#C8EAD3")),
     TEXT(80, 30, new BasicStroke(1), Color.WHITE, Color.BLACK);
 
-    private int width;
-    private int height;
-    private Stroke outer;
-    private Color outline;
-    private Color fill;
+    private final int width;
+    private final int height;
+    private final Stroke outer;
+    private final Color outline;
+    private final Color fill;
 
     NodeType(int width, int height, Stroke outer, Color outline, Color fill) {
         this.width = width;

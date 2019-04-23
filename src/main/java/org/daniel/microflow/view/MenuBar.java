@@ -8,15 +8,15 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-public class MenuBar extends JMenuBar {
+class MenuBar extends JMenuBar {
 
-    private JMenu jmFile;
-    private JMenu jmTools;
-    private JMenu jmWindow;
-    private JMenu jmHelp;
+    private final JMenu jmFile;
+    private final JMenu jmTools;
+    private final JMenu jmWindow;
+    private final JMenu jmHelp;
 
-    private DiagramView view;
-    private JPanel jpToolBar;
+    private final DiagramView view;
+    private final JPanel jpToolBar;
 
     private static final String ABOUT_MSG = "Microflow " + Microflow.VERSION + "\nDaniel Ortiz & Joan Gómez\n" +
             "Inspired by the original BubbleWizard of F. Escudero\nhttps://github.com/ortizdaniel/microflow\n" +

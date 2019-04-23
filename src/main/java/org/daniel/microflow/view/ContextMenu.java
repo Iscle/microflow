@@ -8,9 +8,9 @@ import java.awt.event.ActionListener;
 
 public class ContextMenu extends JPopupMenu {
 
-    private JMenuItem jmiEdit;
-    private JMenuItem jmiEditFunctions;
-    private JMenuItem jmiDelete;
+    private final JMenuItem jmiEdit;
+    private final JMenuItem jmiEditFunctions;
+    private final JMenuItem jmiDelete;
 
     public ContextMenu() {
 
@@ -43,8 +43,8 @@ public class ContextMenu extends JPopupMenu {
         jmiEdit.setActionCommand(CursorDetail.EDIT.name());
         jmiDelete.addActionListener(l);
         jmiDelete.setActionCommand(CursorDetail.DELETE_POPUP.name());
-        jmiEditFunctions.setActionCommand(CursorDetail.SHOW_EDIT_FUNCTION.name());
         jmiEditFunctions.addActionListener(l);
+        jmiEditFunctions.setActionCommand(CursorDetail.SHOW_EDIT_FUNCTION.name());
     }
 
     public void setEditString(String s) {

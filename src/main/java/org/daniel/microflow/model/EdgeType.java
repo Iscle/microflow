@@ -10,8 +10,8 @@ public enum EdgeType {
     OPERATION(new BasicStroke(1.5f), Color.BLUE),
     INTERFACE(new BasicStroke(1.5f), Color.BLACK);
 
-    private Stroke stroke;
-    private Color color;
+    private final Stroke stroke;
+    private final Color color;
 
     EdgeType(Stroke stroke, Color color) {
         this.stroke = stroke;

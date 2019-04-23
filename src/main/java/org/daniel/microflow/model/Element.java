@@ -7,18 +7,18 @@ import java.awt.geom.Point2D;
 
 public abstract class Element implements Drawable {
 
-    protected String name;
-    protected boolean selected;
-    protected Rectangle bounds;
+    String name;
+    transient boolean selected;
+    Rectangle bounds;
     private boolean holdName;
 
-    protected static final Stroke STROKE_SMALL = new BasicStroke(1);
+    static final Stroke STROKE_SMALL = new BasicStroke(1);
 
-    protected static final Font FONT_SMALL = new Font("Calibri", Font.PLAIN, 14);
-    protected static final Font FONT_MED = new Font("Calibri", Font.PLAIN, 18);
-    protected static final Font FONT_LARGE = new Font("Calibri", Font.PLAIN, 24);
+    static final Font FONT_SMALL = new Font("Calibri", Font.PLAIN, 14);
+    static final Font FONT_MED = new Font("Calibri", Font.PLAIN, 18);
+    static final Font FONT_LARGE = new Font("Calibri", Font.PLAIN, 24);
 
-    public Element(String name) {
+    Element(String name) {
         this.name = name;
         bounds = new Rectangle();
         holdName = false;
@@ -34,7 +34,7 @@ public abstract class Element implements Drawable {
         return name;
     }
 
-    public boolean isSelected() {
+    boolean isSelected() {
         return selected;
     }
 
@@ -46,7 +46,7 @@ public abstract class Element implements Drawable {
         this.selected = selected;
     }
 
-    protected void drawOutline(Graphics2D g) {
+    void drawOutline(Graphics2D g) {
         g.setStroke(STROKE_SMALL);
         g.setColor(Color.GRAY);
         g.draw(bounds);
@@ -56,20 +56,20 @@ public abstract class Element implements Drawable {
         return bounds.getLocation();
     }
 
-    public boolean nameHold() {
+    public boolean getHoldName() {
         return holdName;
     }
 
-    public void holdName(boolean holdName) {
+    public void setHoldName(boolean holdName) {
         this.holdName = holdName;
     }
 
-    protected Point2D.Double pointOfEllipsePositive(double x, int h, int k, int r) {
+    Point2D.Double pointOfEllipsePositive(double x, int h, int k, int r) {
         x -= r;
         return new Point2D.Double(x + h, Math.sqrt(Math.pow(r, 2) - Math.pow(x, 2)) + k);
     }
 
-    protected Point2D.Double pointOfEllipseNegative(double x, int h, int k, int r) {
+    Point2D.Double pointOfEllipseNegative(double x, int h, int k, int r) {
         x -= r;
         return new Point2D.Double(x + h, -Math.sqrt(Math.pow(r, 2) - Math.pow(x, 2)) + k);
     }
@@ -78,7 +78,7 @@ public abstract class Element implements Drawable {
         return Math.hypot(p0.x - p1.x, p0.y - p1.y);
     }
 
-    protected double distanceTo(Point2D.Double p0, Point p1) {
+    double distanceTo(Point2D.Double p0, Point p1) {
         return Math.hypot(p0.x - p1.x, p0.y - p1.y);
     }
 

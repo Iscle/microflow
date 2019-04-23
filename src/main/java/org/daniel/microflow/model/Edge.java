@@ -8,7 +8,7 @@ import java.awt.geom.Rectangle2D;
 
 public class Edge extends Element {
 
-    private EdgeType type;
+    private final EdgeType type;
     private Node n1;
     private Node n2;
     private final Node originalN1;
@@ -399,7 +399,7 @@ public class Edge extends Element {
     /**
      * https://stackoverflow.com/questions/21267412/drawing-strings-inscribed-in-a-circle
      */
-    protected void drawCenteredText(Graphics2D g, int x, int y, String text, Font f, Object caller) {
+    private void drawCenteredText(Graphics2D g, int x, int y, String text, Font f, Object caller) {
         g.setFont(text.length() >= 20 ? FONT_MED : f); //bueeeno...
         FontMetrics fm = g.getFontMetrics();
         Rectangle2D rect = fm.getStringBounds(text, g);
