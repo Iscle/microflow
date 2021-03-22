@@ -33,6 +33,8 @@ public class OuterView extends JFrame {
         tabbedPane = new JTabbedPane();
         tabbedPane.setBorder(new EmptyBorder(0, 0, 0, 0));
         setTitle("Microflow - " + TITLE + tabId);
+        setIconImage(new ImageIcon(getClass().getResource("/image/logo.png")).getImage()
+                .getScaledInstance(128, 128, Image.SCALE_SMOOTH));
 
         if (System.getProperty("os.name").startsWith("Mac")) {
             tabbedPane.setUI(new BasicTabbedPaneUI() {

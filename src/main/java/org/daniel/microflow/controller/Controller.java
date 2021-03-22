@@ -123,6 +123,9 @@ public class Controller extends MouseAdapter implements ActionListener {
             case UNDO:
                 model.undo();
                 break;
+            case REDO:
+                model.redo();
+                break;
         }
 
         if (state.getCursor().equals(Cursor.getDefaultCursor())) {
@@ -428,7 +431,7 @@ public class Controller extends MouseAdapter implements ActionListener {
                     break;
                 case OPERATION:
                     int res = JOptionPane.showOptionDialog(view, "What would you like this operation to be?",
-                            "Operation settings", 0, JOptionPane.QUESTION_MESSAGE, null, OPTIONS,
+                            "Operation settings", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, OPTIONS,
                             null);
                     if (res == 2) { //read
                         model.addPhase();

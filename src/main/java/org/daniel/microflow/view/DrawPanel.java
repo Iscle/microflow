@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.geom.QuadCurve2D;
 
 public class DrawPanel extends JPanel {
@@ -22,7 +21,6 @@ public class DrawPanel extends JPanel {
     private Rectangle bounds;
     private final Stroke lineStroke = new BasicStroke(1.5f);
     private final Graph graph;
-    private final ComponentListener resizeListener;
     private Dimension dim;
 
     public DrawPanel(Graph graph) {
@@ -31,14 +29,12 @@ public class DrawPanel extends JPanel {
         type = NONE;
         bounds = new Rectangle(0, 0, getWidth() - 100, getHeight() - 100);
 
-        resizeListener = new ComponentAdapter() {
+        addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 bounds.setBounds(0, 0, getWidth() - 100, getHeight() - 100);
             }
-        };
-
-        addComponentListener(resizeListener);
+        });
         this.graph = graph;
         dim = new Dimension();
     }

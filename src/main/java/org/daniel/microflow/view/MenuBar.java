@@ -37,6 +37,7 @@ public class MenuBar extends JMenuBar {
     private JMenuItem jmiCursor;
     private JMenuItem jmiDelete;
     private JMenuItem jmiUndo;
+    private JMenuItem jmiRedo;
     private JMenuItem jmiTAD;
     private JMenuItem jmiVar;
     private JMenuItem jmiPeri;
@@ -120,10 +121,14 @@ public class MenuBar extends JMenuBar {
         jmiUndo = new JMenuItem("Undo");
         jmiUndo.setAccelerator(
                 KeyStroke.getKeyStroke(KeyEvent.VK_Z, (Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())));
+        jmiRedo = new JMenuItem("Redo");
+        jmiRedo.setAccelerator(
+                KeyStroke.getKeyStroke(KeyEvent.VK_Y, (Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())));
 
         jmTools.add(jmiCursor);
         jmTools.add(jmiDelete);
         jmTools.add(jmiUndo);
+        jmTools.add(jmiRedo);
         jmTools.addSeparator();
 
         /* TAD Tools */
@@ -164,11 +169,7 @@ public class MenuBar extends JMenuBar {
         //jmiMaximize.addActionListener(e -> view.setExtendedState(JFrame.MAXIMIZED_BOTH));
 
         jmiToolBar.addActionListener(e -> {
-            if (jpToolBar.isVisible()) {
-                jpToolBar.setVisible(false);
-            } else {
-                jpToolBar.setVisible(true);
-            }
+            jpToolBar.setVisible(!jpToolBar.isVisible());
         });
 
         jmiSize.addActionListener(e -> view.changeDimension());
@@ -217,6 +218,8 @@ public class MenuBar extends JMenuBar {
         jmiDelete.setActionCommand(CursorDetail.DELETING.name());
         jmiUndo.setActionCommand(CursorDetail.UNDO.name());
         jmiUndo.addActionListener(c);
+        jmiRedo.setActionCommand(CursorDetail.REDO.name());
+        jmiRedo.addActionListener(c);
 
         jmiTAD.addActionListener(c);
         jmiTAD.setActionCommand(CursorDetail.ADD_TAD.name());

@@ -19,6 +19,7 @@ public class Graph {
     private LinkedList<Edge> edges;
     private LinkedList<Action> actions;
     private transient LinkedList<String> phases;
+    private transient LinkedList<String> revertedPhases;
     private int stateCount;
     private int interfaceCount;
 
@@ -27,7 +28,7 @@ public class Graph {
         edges = new LinkedList<>();
         actions = new LinkedList<>();
         phases = new LinkedList<>();
-        addPhase();
+        revertedPhases = new LinkedList<>();
     }
 
     public Element getElementAt(Point p) {
@@ -118,10 +119,9 @@ public class Graph {
 
     public void changedStateName(Node n) {
         if (n.getType().equals(NodeType.STATE)) {
-            int changedTo = Integer.valueOf(n.getName());
+            int changedTo = Integer.parseInt(n.getName());
             int count = 0;
-            for (int i = 0; i < nodes.size(); i++) {
-                Node k = nodes.get(i);
+            for (Node k : nodes) {
                 if (k.getType().equals(NodeType.STATE) && !k.nameHold()) {
                     if (count == changedTo) {
                         count++;
@@ -135,10 +135,9 @@ public class Graph {
 
     public void changedInterfaceName(Edge e) {
         if (e.getType().equals(EdgeType.INTERFACE)) {
-            int changedTo = Integer.valueOf(e.getName());
+            int changedTo = Integer.parseInt(e.getName());
             int count = 0;
-            for (int i = 0; i < edges.size(); i++) {
-                Edge k = edges.get(i);
+            for (Edge k : edges) {
                 if (k.getType().equals(EdgeType.INTERFACE) && !k.nameHold()) {
                     if (count == changedTo) {
                         count++;
@@ -195,7 +194,7 @@ public class Graph {
     public boolean loadFromFile(String path) {
         try {
             CharsetDecoder decoder = Charset.forName("ISO-8859-1").newDecoder();
-            InputStreamReader stream = new InputStreamReader(new FileInputStream(new File(path)), decoder);
+            InputStreamReader stream = new InputStreamReader(new FileInputStream(path), decoder);
             BufferedReader reader = new BufferedReader(stream);
             StringBuilder sb = new StringBuilder();
             String line;
@@ -294,11 +293,26 @@ public class Graph {
 
     public void addPhase() {
         phases.add(toJson());
+
+        if (revertedPhases.size() > 0) {
+            revertedPhases.clear();
+        }
     }
 
     public void undo() {
-        loadFromJson(phases.getLast());
-        if (phases.size() > 1) phases.removeLast();
+        if (phases.size() > 0) {
+            revertedPhases.add(toJson());
+            loadFromJson(phases.getLast());
+            phases.removeLast();
+        }
+    }
+
+    public void redo() {
+        if (revertedPhases.size() > 0) {
+            phases.add(toJson());
+            loadFromJson(revertedPhases.getLast());
+            revertedPhases.removeLast();
+        }
     }
 
     public int getStateCount() {

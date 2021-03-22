@@ -37,7 +37,8 @@ public enum CursorDetail {
     GEN_FILES(Cursor.getDefaultCursor(), null, null),
     GEN_MOTOR(Cursor.getDefaultCursor(), null, null),
     GEN_DICT(Cursor.getDefaultCursor(), null, null),
-    UNDO(Cursor.getDefaultCursor(), null, null);
+    UNDO(Cursor.getDefaultCursor(), null, null),
+    REDO(Cursor.getDefaultCursor(), null, null);
 
     private Cursor cursor;
     private Object elementToAdd;
@@ -68,9 +69,7 @@ public enum CursorDetail {
                     .getScaledInstance(30, 30, Image.SCALE_SMOOTH);
 
             if (img != null) return tk.createCustomCursor(img, new Point(0, 0), "");
-            return Cursor.getDefaultCursor();
-        } else {
-            return Cursor.getDefaultCursor();
         }
+        return Cursor.getDefaultCursor();
     }
 }
