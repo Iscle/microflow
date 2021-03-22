@@ -173,7 +173,7 @@ public class Node extends Element {
             g.setColor(Color.BLACK);
             int nameWidth = g.getFontMetrics().stringWidth(name);
             g.drawString(name, center.x - nameWidth / 2,
-                center.y + f.getSize() / 3);
+                    center.y + f.getSize() / 3);
         }
     }
 

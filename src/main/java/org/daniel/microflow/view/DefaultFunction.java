@@ -20,7 +20,7 @@ public enum DefaultFunction {
                     "//Retorna -1 if there are no available characters.\n\n" +
 
                     "char SiGetChar(void);\n" +
-                    "//Pre: SiCharAvail() returns a number greater than zero.\n"+
+                    "//Pre: SiCharAvail() returns a number greater than zero.\n" +
                     "//Post: returns and removes the first element from the reception queue.\n\n" +
 
                     "char SiIsAvailable(void);\n" +
@@ -60,7 +60,7 @@ public enum DefaultFunction {
                     "//Retorna -1 si no hay ningún caracter disponible.\n\n" +
 
                     "char SiGetChar(void);\n" +
-                    "//Pre: SiCharAvail() retorna mayor que cero.\n"+
+                    "//Pre: SiCharAvail() retorna mayor que cero.\n" +
                     "//Post: saca y retorna el primer caracter de la cola de recepción.\n\n" +
 
                     "char SiIsAvailable(void);\n" +
@@ -100,7 +100,7 @@ public enum DefaultFunction {
                     "//Retorna -1 si no hi ha cap caracter disponible.\n\n" +
 
                     "char SiGetChar(void);\n" +
-                    "//Pre: SiCharAvail() és major que zero.\n"+
+                    "//Pre: SiCharAvail() és major que zero.\n" +
                     "//Post: Treu i retorna el primer caràcter de la cua de recepció.\n\n" +
 
                     "char SiIsAvailable(void);\n" +
@@ -128,7 +128,7 @@ public enum DefaultFunction {
     private String basicText;
 
     DefaultFunction(String timer, String sio, String adc, String basic) {
-        timerText  = timer;
+        timerText = timer;
         sioText = sio;
         adcText = adc;
         basicText = basic;

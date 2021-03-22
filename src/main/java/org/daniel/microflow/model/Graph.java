@@ -261,7 +261,8 @@ public class Graph {
                     if (ours <= theirs) {
                         interfaceCount = theirs + 1;
                     }
-                } catch (NumberFormatException ok) { }
+                } catch (NumberFormatException ok) {
+                }
             }
             for (Node n : g.nodes) {
                 try {
@@ -270,7 +271,8 @@ public class Graph {
                     if (ours <= theirs) {
                         stateCount = theirs + 1;
                     }
-                } catch (NumberFormatException ok) { }
+                } catch (NumberFormatException ok) {
+                }
                 if (e.getN1().equals(n)) e.setN1(n);
                 if (e.getN2().equals(n)) e.setN2(n);
                 n.setSelected(false);

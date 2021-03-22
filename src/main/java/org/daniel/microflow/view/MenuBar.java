@@ -5,7 +5,6 @@ import org.daniel.microflow.controller.CursorDetail;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
@@ -185,7 +184,7 @@ public class MenuBar extends JMenuBar {
         JMenuItem jmiAbout = new JMenuItem("About");
         jmiAbout.addActionListener(e -> {
             Image image = new ImageIcon(getClass().getResource(LOGO_PATH)).getImage();
-            image = image.getScaledInstance(80, 80,  java.awt.Image.SCALE_SMOOTH);
+            image = image.getScaledInstance(80, 80, java.awt.Image.SCALE_SMOOTH);
             Icon icon = new ImageIcon(image);
             JOptionPane.showMessageDialog(null, ABOUT_MSG, "Credits", JOptionPane.INFORMATION_MESSAGE, icon);
         });

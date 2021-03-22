@@ -93,7 +93,7 @@ public class DrawPanel extends JPanel {
     }
 
     public void setNewSize(int width, int height) {
-        bounds = new Rectangle(bounds.x, bounds. y, width, height);
+        bounds = new Rectangle(bounds.x, bounds.y, width, height);
     }
 
     @Override

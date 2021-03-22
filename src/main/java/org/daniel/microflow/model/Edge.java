@@ -137,7 +137,7 @@ public class Edge extends Element {
             Point destination =
                     findIntersection(n1.getCenter(), centerPointSame, NodeType.STATE.getWidth() / 2, H / 2);
             Point origin = closestIntersection(centerPointSame, H / 2, pivotPoint, n1.center);
-            return getArrowFor(rotatePoint(destination, 40 * Math.PI/180, origin), destination);
+            return getArrowFor(rotatePoint(destination, 40 * Math.PI / 180, origin), destination);
         } else {
 
             for (double t = 1; t >= 0; t -= 0.005) {
@@ -181,8 +181,7 @@ public class Edge extends Element {
     }
 
     private int findLineCircleIntersections(float cx, float cy, float radius,
-                                            Point point1, Point point2, Point intersection1, Point intersection2)
-    {
+                                            Point point1, Point point2, Point intersection1, Point intersection2) {
         float dx, dy, A, B, C, det, t;
 
         dx = point2.x - point1.x;
@@ -203,10 +202,10 @@ public class Edge extends Element {
             return 1;
         } else {
             // Two solutions.
-            t = (float)((-B + Math.sqrt(det)) / (2 * A));
+            t = (float) ((-B + Math.sqrt(det)) / (2 * A));
             intersection1.x = (int) (point1.x + t * dx);
             intersection1.y = (int) (point1.y + t * dy);
-            t = (float)((-B - Math.sqrt(det)) / (2 * A));
+            t = (float) ((-B - Math.sqrt(det)) / (2 * A));
             intersection2.x = (int) (point1.x + t * dx);
             intersection2.y = (int) (point1.y + t * dy);
             return 2;
@@ -222,25 +221,25 @@ public class Edge extends Element {
         double centerDy = y1 - y2;
         double R = Math.sqrt(centerDx * centerDx + centerDy * centerDy);
 
-        double R2 = R*R;
-        double R4 = R2*R2;
-        double a = (r1*r1 - r2*r2) / (2 * R2);
-        double r2r2 = (r1*r1 - r2*r2);
-        double c = Math.sqrt(2 * (r1*r1 + r2*r2) / R2 - (r2r2 * r2r2) / R4 - 1);
+        double R2 = R * R;
+        double R4 = R2 * R2;
+        double a = (r1 * r1 - r2 * r2) / (2 * R2);
+        double r2r2 = (r1 * r1 - r2 * r2);
+        double c = Math.sqrt(2 * (r1 * r1 + r2 * r2) / R2 - (r2r2 * r2r2) / R4 - 1);
 
-        double fx = (x1+x2) / 2f + a * (x2 - x1);
+        double fx = (x1 + x2) / 2f + a * (x2 - x1);
         double gx = c * (y2 - y1) / 2;
         double ix1 = fx + gx;
         double ix2 = fx - gx;
 
-        double fy = (y1+y2) / 2f + a * (y2 - y1);
+        double fy = (y1 + y2) / 2f + a * (y2 - y1);
         double gy = c * (x1 - x2) / 2;
         double iy1 = fy + gy;
         double iy2 = fy - gy;
 
         return new Point((int) ix2, (int) iy2);
     }
-    
+
     private Point bezierLinear(double t, Point p0, Point p1) {
         return new Point(
                 (int) (p0.x + t * (p1.x - p0.x)),
@@ -481,20 +480,20 @@ public class Edge extends Element {
             Point2D.Double nearest = new Point2D.Double(0, 0);
             for (double i = 0; i < H; i += 0.005) {
                 //if (p.y >= centerPointSame.y) {
-                    Point2D.Double pos = pointOfEllipsePositive(i, centerPointSame.x, centerPointSame.y, H/2);
-                    double dPos = Math.hypot(p.x - pos.x, p.y - pos.y);
-                    if (dPos < min) {
-                        min = dPos;
-                        nearest = pos;
-                    }
+                Point2D.Double pos = pointOfEllipsePositive(i, centerPointSame.x, centerPointSame.y, H / 2);
+                double dPos = Math.hypot(p.x - pos.x, p.y - pos.y);
+                if (dPos < min) {
+                    min = dPos;
+                    nearest = pos;
+                }
                 //} else {
-                    Point2D.Double neg = pointOfEllipseNegative(i, centerPointSame.x, centerPointSame.y, H / 2);
-                    double dNeg = Math.hypot(p.x - neg.x, p.y - neg.y);
+                Point2D.Double neg = pointOfEllipseNegative(i, centerPointSame.x, centerPointSame.y, H / 2);
+                double dNeg = Math.hypot(p.x - neg.x, p.y - neg.y);
 
-                    if (dNeg < min) {
-                        min = dNeg;
-                        nearest = neg;
-                    }
+                if (dNeg < min) {
+                    min = dNeg;
+                    nearest = neg;
+                }
                 //}
             }
             return new Point((int) nearest.x, (int) nearest.y);
